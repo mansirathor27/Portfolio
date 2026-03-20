@@ -476,7 +476,7 @@ function Hero() {
           theme={theme}
           variants={itemVariants}
         >
-          I'm a{' '}
+          I'm a{' Full Stack Developer'}
           <span className="highlight">
             <TypewriterText>
               {text}
