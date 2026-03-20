@@ -1,0 +1,108 @@
+import React from 'react';
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import { useTheme } from 'styled-components';
+import { FiGithub, FiLinkedin, FiMail, FiHeart } from 'react-icons/fi';
+
+const FooterContainer = styled.footer`
+  background: ${props => props.theme.cardBg};
+  backdrop-filter: blur(10px);
+  border-top: 1px solid ${props => props.theme.border};
+  padding: 3rem 5%;
+`;
+
+const FooterContent = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+`;
+
+const SocialLinks = styled.div`
+  display: flex;
+  gap: 1.5rem;
+`;
+
+const SocialLink = styled(motion.a)`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: ${props => props.theme.background};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: ${props => props.theme.primary};
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: ${props => props.theme.primary};
+    color: white;
+    transform: translateY(-3px);
+  }
+`;
+
+const Copyright = styled.p`
+  color: ${props => props.theme.text};
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+
+  svg {
+    color: ${props => props.theme.primary};
+    animation: heartbeat 1.5s ease infinite;
+  }
+
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+`;
+
+const Footer = () => {
+  const theme = useTheme();
+
+  return (
+    <FooterContainer theme={theme}>
+      <FooterContent>
+        <SocialLinks>
+          <SocialLink
+            theme={theme}
+            href="https://github.com/mansirathor27"
+            target="_blank"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <FiGithub />
+          </SocialLink>
+          <SocialLink
+            theme={theme}
+            href="http://www.linkedin.com/in/mansi-rathor"
+            target="_blank"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <FiLinkedin />
+          </SocialLink>
+          <SocialLink
+            theme={theme}
+            href="mailto:mansirathor575@gmail.com"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <FiMail />
+          </SocialLink>
+        </SocialLinks>
+
+        <Copyright theme={theme}>
+          Made with <FiHeart /> by Mansi Rathor © {new Date().getFullYear()}
+        </Copyright>
+      </FooterContent>
+    </FooterContainer>
+  );
+};
+
+export default Footer;
