@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import { useTheme } from 'styled-components';
 import { FiMail, FiPhone, FiMapPin, FiSend } from 'react-icons/fi';
-import emailjs from '@emailjs/browser';
 
 const ContactSection = styled.section`
   min-height: 100vh;

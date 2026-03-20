@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import { useTheme } from 'styled-components';
-import { FiUser, FiCode, FiAward } from 'react-icons/fi';
 import profileImage from '../assets/images/profile.jpg';
 const AboutSection = styled.section`
   min-height: 100vh;
@@ -89,11 +88,8 @@ const StatLabel = styled.div`
   color: ${props => props.theme.text};
 `;
 
-const Highlights = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
+
+
 
 
 function About() {

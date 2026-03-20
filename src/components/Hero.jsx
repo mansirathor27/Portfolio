@@ -9,10 +9,7 @@ const float = keyframes`
   50% { transform: translateY(-20px); }
 `;
 
-const glow = keyframes`
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 1; }
-`;
+
 
 const rotate = keyframes`
   from { transform: rotate(0deg); }
@@ -322,6 +319,7 @@ const TypewriterText = styled(motion.span)`
     50% { opacity: 0; }
   }
 `;
+const titles = ['Full Stack Developer', 'Problem Solver', 'MERN Expert', 'Tech Enthusiast'];
 
 function Hero() {
   const theme = useTheme();
@@ -336,7 +334,7 @@ function Hero() {
  
 
   useEffect(() => {
-     const titles = ['Full Stack Developer', 'Problem Solver', 'MERN Expert', 'Tech Enthusiast'];
+     
     const handleTyping = () => {
       const i = loopNum % titles.length;
       const fullText = titles[i];

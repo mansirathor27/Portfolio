@@ -91,7 +91,7 @@ const ProjectCard = styled(motion.div)`
 const ProjectImageContainer = styled(motion.div)`
   position: relative;
   overflow: hidden;
-  width: 100%
+  width: 100%;
   height: 300px;
   
   @media (max-width: 968px) {
