@@ -1,19 +1,15 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { useTheme } from 'styled-components';
 import resumeImage from "../assets/images/resumebuilderimage.png";
 import contactImage from "../assets/images/contactmanagement.jpg";
 import bankerImage from "../assets/images/bankeralgorithm.jpg";
 import ChatImage from "../assets/images/chatappimage.jpg";
 import { 
-  FiExternalLink, 
   FiGithub, 
   FiClock, 
-  FiUsers,
-  FiStar,
-  FiCode,
-  FiAward
+
 } from 'react-icons/fi';
 
 const ProjectsSection = styled.section`
@@ -193,18 +189,6 @@ const TechTag = styled(motion.span)`
 
 
 
-const StatItem = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: ${props => props.theme.text};
-  font-size: 0.9rem;
-  
-  svg {
-    color: #667eea;
-  }
-`;
-
 const ProjectLinks = styled.div`
   display: flex;
   gap: 1rem;
@@ -310,15 +294,7 @@ function Projects() {
   const [currentPage, setCurrentPage] = useState(0);
   const projectsPerPage = 2;
 
-  // Project images from Unsplash (free to use)
-  const projectImages = [
-    "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&auto=format", // Code background
-    "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&auto=format", // Coding setup
-    "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&auto=format", // Mobile app
-    "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=800&auto=format", // Laptop code
-    "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=800&auto=format", // Server room
-    "https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=800&auto=format" // Code on screen
-  ];
+
 
   const projects = [
     {

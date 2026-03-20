@@ -333,9 +333,10 @@ function Hero() {
   const [loopNum, setLoopNum] = useState(0);
   const [typingSpeed, setTypingSpeed] = useState(150);
 
-  const titles = ['Full Stack Developer', 'Problem Solver', 'MERN Expert', 'Tech Enthusiast'];
+ 
 
   useEffect(() => {
+     const titles = ['Full Stack Developer', 'Problem Solver', 'MERN Expert', 'Tech Enthusiast'];
     const handleTyping = () => {
       const i = loopNum % titles.length;
       const fullText = titles[i];
@@ -358,7 +359,7 @@ function Hero() {
 
     const timer = setTimeout(handleTyping, typingSpeed);
     return () => clearTimeout(timer);
-  }, [text, isDeleting, loopNum, typingSpeed, titles]);
+  }, [text, isDeleting, loopNum, typingSpeed]);
 
   useEffect(() => {
     if (inView) {

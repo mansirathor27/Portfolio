@@ -34,11 +34,6 @@ const glowPulse = keyframes`
   50% { filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.8)); }
 `;
 
-const float = keyframes`
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  25% { transform: translateY(-10px) rotate(2deg); }
-  75% { transform: translateY(10px) rotate(-2deg); }
-`;
 
 const SkillsSection = styled.section`
   min-height: 100vh;
