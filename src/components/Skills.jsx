@@ -15,9 +15,7 @@ import {
   Si1001Tracklists, 
   SiTailwindcss, 
   SiReact,
-  SiNextdotjs,
-  SiRedux,
-  SiFigma,
+
   
   // Backend & Tools
   SiNodedotjs, 
@@ -100,36 +98,33 @@ const SkillsGrid = styled.div`
 `;
 
 const SkillCard = styled(motion.div)`
-  background: ${props => props.theme.cardBg};
-  backdrop-filter: blur(10px);
-  border: 1px solid ${props => props.theme.border};
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 212, 255, 0.1);
   border-radius: 20px;
   padding: 2rem;
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  transform-style: preserve-3d;
-  transition: all 0.3s ease;
-  min-width: 0;   /* ✅ VERY IMPORTANT */
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  min-width: 0;
+  
   &::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 5px;
-    background: linear-gradient(90deg, #667eea, #764ba2, #ff6b6b);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.5s ease;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
   }
   
   &:hover {
-    transform: translateY(-10px) rotateX(5deg);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    transform: translateY(-10px);
+    border-color: rgba(0, 212, 255, 0.5);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 212, 255, 0.1);
     
     &::before {
-      transform: scaleX(1);
+      opacity: 1;
     }
   }
 `;
@@ -201,7 +196,7 @@ const SkillLevel = styled.div`
   width: 80px;
   min-width: 80px;
   height: 6px;
-  background: ${props => props.theme.border};
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 3px;
   overflow: hidden;
   position: relative;
@@ -213,7 +208,8 @@ const SkillLevel = styled.div`
     left: 0;
     height: 100%;
     width: ${props => props.level || '0%'};
-    background: linear-gradient(90deg, #667eea, #764ba2);
+    background: linear-gradient(90deg, #00d4ff, #6d28d9);
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
     border-radius: 3px;
     animation: skillFill 1.5s ease-out forwards;
   }
@@ -281,9 +277,6 @@ function Skills() {
         { name: 'CSS3', icon: Si1001Tracklists, level: '92%' },
         { name: 'Tailwind', icon: SiTailwindcss, level: '88%' },
         { name: 'React', icon: SiReact, level: '85%' },
-        { name: 'Next.js', icon: SiNextdotjs, level: '75%', expanded: true },
-        { name: 'Redux', icon: SiRedux, level: '80%', expanded: true },
-        { name: 'Figma', icon: SiFigma, level: '70%', expanded: true }
       ]
     },
     {

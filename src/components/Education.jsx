@@ -25,7 +25,8 @@ const Timeline = styled.div`
     transform: translateX(-50%);
     width: 2px;
     height: 100%;
-    background: linear-gradient(180deg, ${props => props.theme.primary}, ${props => props.theme.accent});
+    background: linear-gradient(180deg, #00d4ff, #6d28d9);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
     
     @media (max-width: 768px) {
       left: 20px;
@@ -47,16 +48,21 @@ const TimelineItem = styled(motion.div)`
 
 const TimelineContent = styled(motion.div)`
   width: 45%;
-  background: ${props => props.theme.cardBg};
-  backdrop-filter: blur(10px);
-  border: 1px solid ${props => props.theme.border};
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 212, 255, 0.1);
   border-radius: 20px;
   padding: 1.5rem;
   position: relative;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+  transition: all 0.3s ease;
 
   @media (max-width: 768px) {
     width: 100%;
+  }
+
+  &:hover {
+    border-color: rgba(0, 212, 255, 0.4);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   }
 
   &::before {
@@ -67,9 +73,10 @@ const TimelineContent = styled(motion.div)`
     transform: translateY(-50%);
     width: 20px;
     height: 20px;
-    background: ${props => props.theme.primary};
+    background: #00d4ff;
+    box-shadow: 0 0 10px #00d4ff;
     border-radius: 50%;
-    border: 3px solid ${props => props.theme.background};
+    border: 3px solid #0a0a0f;
 
     @media (max-width: 768px) {
       left: -30px;

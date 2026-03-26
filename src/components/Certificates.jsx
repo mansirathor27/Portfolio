@@ -22,14 +22,19 @@ const CertificatesGrid = styled.div`
 `;
 
 const CertificateCard = styled(motion.div)`
-  background: ${props => props.theme.cardBg};
-  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 212, 255, 0.1);
+  border-radius: 20px;
   padding: 2rem;
-  backdrop-filter: blur(10px);
-  border: 1px solid ${props => props.theme.border};
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
   position: relative;
   overflow: hidden;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: rgba(0, 212, 255, 0.4);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
 
   &::before {
     content: '';
@@ -38,7 +43,8 @@ const CertificateCard = styled(motion.div)`
     left: 0;
     width: 100%;
     height: 5px;
-    background: linear-gradient(90deg, ${props => props.theme.primary}, ${props => props.theme.accent});
+    background: linear-gradient(90deg, #00d4ff, #6d28d9);
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
   }
 `;
 

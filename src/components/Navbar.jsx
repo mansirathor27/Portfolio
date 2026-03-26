@@ -1,22 +1,43 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import styled from 'styled-components';
 import { useTheme } from 'styled-components';
 import { FiMenu, FiX } from 'react-icons/fi';
 
-const NavbarContainer = styled(motion.nav)`
+const Nav = styled(motion.nav)`
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%) !important;
+  width: auto;
+  min-width: 60%;
+  max-width: 90%;
+  padding: 0.5rem 2rem;
+  background: rgba(10, 10, 15, 0.4);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   z-index: 1000;
-  padding: 1rem 2rem;
-  background: ${props => props.scrolled 
-    ? (props.theme === 'light' ? 'rgba(255, 255, 255, 0.95)' : 'rgba(18, 18, 18, 0.95)')
-    : 'transparent'};
-  backdrop-filter: ${props => props.scrolled ? 'blur(10px)' : 'none'};
-  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(0, 212, 255, 0.05);
+  
+  @media (max-width: 768px) {
+    width: 90%;
+    min-width: 90%;
+    top: 10px;
+  }
+`;
+
+const NavProgress = styled(motion.div)`
+  position: absolute;
+  bottom: 0;
+  left: 30px;
+  right: 30px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #00d4ff, transparent);
+  transform-origin: left;
 `;
 
 const NavContent = styled.div`
@@ -25,16 +46,21 @@ const NavContent = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%; /* Ensure it takes full width within padding */
 `;
 
 const Logo = styled(motion.div)`
-  font-size: 1.8rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #fff;
   cursor: pointer;
-  letter-spacing: -0.5px;
+  letter-spacing: 2px;
+  font-family: 'Mono', monospace;
+  
+  span {
+    color: #00d4ff;
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+  }
 `;
 
 const NavLinks = styled.ul`
@@ -49,9 +75,9 @@ const NavLinks = styled.ul`
     left: 0;
     width: 100%;
     height: 100vh;
-    background: ${props => props.theme === 'light' 
+    background: ${props => props.theme.type === 'light' 
       ? 'rgba(255, 255, 255, 0.98)' 
-      : 'rgba(18, 18, 18, 0.98)'};
+      : 'rgba(10, 10, 15, 0.98)'};
     backdrop-filter: blur(10px);
     flex-direction: column;
     justify-content: center;
@@ -64,35 +90,23 @@ const NavLinks = styled.ul`
 const NavLink = styled(motion.li)`
   a {
     text-decoration: none;
-    color: ${props => props.theme.text};
-    font-weight: 500;
-    font-size: 1rem;
-    position: relative;
-    padding: 0.5rem 0;
-    transition: color 0.3s ease;
-
-    @media (max-width: 768px) {
-      font-size: 1.5rem;
-    }
-
-    &::before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: linear-gradient(90deg, #667eea, #764ba2);
-      transition: width 0.3s ease;
-    }
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
 
     &:hover {
-      color: #667eea;
-      
-      &::before {
-        width: 100%;
-      }
+      color: #00d4ff;
     }
+  }
+  
+  &.active a {
+    color: #fff;
+    background: rgba(0, 212, 255, 0.1);
+    border-radius: 50px;
   }
 `;
 
@@ -126,6 +140,12 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const theme = useTheme();
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -146,20 +166,18 @@ function Navbar() {
   };
 
   return (
-    <NavbarContainer
-      theme={theme}
-      scrolled={scrolled}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5 }}
+    <Nav
+      initial={{ y: -100, x: "-50%" }}
+      animate={{ y: 0, x: "-50%" }}
+      transition={{ duration: 0.8, type: "spring", damping: 15 }}
     >
-      <NavContent>
+      <NavProgress style={{ scaleX }} />
+      <NavContent className="!justify-between !mx-0 !max-w-none">
         <Logo
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={{ scale: 1.02 }}
           onClick={() => scrollToSection('home')}
         >
-          Mansi Rathor
+          Mansi<span>Rathor</span>
         </Logo>
 
         <MobileMenuBtn onClick={() => setIsOpen(!isOpen)}>
@@ -197,7 +215,7 @@ function Navbar() {
           ))}
         </NavLinks>
       </NavContent>
-    </NavbarContainer>
+    </Nav>
   );
 }
 

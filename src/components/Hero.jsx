@@ -3,6 +3,8 @@ import { motion, useAnimation, useInView } from 'framer-motion';
 import styled, { keyframes } from 'styled-components';
 import { useTheme } from 'styled-components';
 import { FiDownload, FiGithub, FiLinkedin, FiMail, FiArrowDown } from 'react-icons/fi';
+import HeroCanvas from './HeroCanvas';
+import Magnetic from './Magnetic';
 
 const float = keyframes`
   0%, 100% { transform: translateY(0px); }
@@ -23,7 +25,7 @@ const HeroSection = styled.section`
   justify-content: center;
   position: relative;
   overflow: hidden;
-  background: ${props => props.theme.background};
+  background: transparent;
   padding: 0 5%;
 `;
 
@@ -284,7 +286,7 @@ const ScrollIndicator = styled(motion.div)`
   cursor: pointer;
   
   a {
-    color: ${props => props.theme.text};
+    color: #fff;
     font-size: 2rem;
     display: flex;
     flex-direction: column;
@@ -296,6 +298,7 @@ const ScrollIndicator = styled(motion.div)`
       font-size: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 2px;
+      color: rgba(255, 255, 255, 0.6);
     }
   }
 
@@ -399,160 +402,125 @@ function Hero() {
 
   return (
     <HeroSection id="home" ref={ref}>
-      <BackgroundOrbs>
-        <Orb 
-          size="400px" 
-          top="-100px" 
-          right="-100px"
-          duration="10s"
-        />
-        <Orb 
-          size="300px" 
-          bottom="-50px" 
-          left="-50px"
-          duration="15s"
-        />
-        <Orb 
-          size="200px" 
-          top="50%" 
-          left="30%"
-          duration="12s"
-        />
-      </BackgroundOrbs>
-
-      <FloatingShapes>
-        <Shape
-          size="60px"
-          top="20%"
-          left="10%"
-          duration="25s"
-          round
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 0.5, scale: 1 }}
-          transition={{ duration: 1, delay: 0.5 }}
-        />
-        <Shape
-          size="80px"
-          bottom="20%"
-          right="15%"
-          duration="30s"
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 0.5, scale: 1 }}
-          transition={{ duration: 1, delay: 0.8 }}
-        />
-        <Shape
-          size="40px"
-          top="30%"
-          right="25%"
-          duration="20s"
-          round
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 0.5, scale: 1 }}
-          transition={{ duration: 1, delay: 1 }}
-        />
-      </FloatingShapes>
+      <HeroCanvas />
 
       <HeroContent
         variants={containerVariants}
         initial="hidden"
         animate={controls}
       >
-        <Greeting
-          theme={theme}
+        <motion.div
           variants={itemVariants}
+          className="mb-6 inline-block rounded-full bg-white/5 px-6 py-2 border border-white/10 backdrop-blur-md"
         >
-          👋 WELCOME TO MY PORTFOLIO
-        </Greeting>
+          <span className="text-sm tracking-[0.3em] text-cyber-cyan uppercase font-medium">
+            👋 HI THERE, I'M
+          </span>
+        </motion.div>
 
         <Name
-          theme={theme}
           variants={itemVariants}
+          className="relative"
         >
-          <span className="first-name">Mansi</span>{' '}
-          <span className="last-name">Rathor</span>
+          <motion.span 
+            className="first-name neon-text-glow"
+            initial={{ filter: "blur(10px)", opacity: 0 }}
+            animate={{ filter: "blur(0px)", opacity: 1 }}
+            transition={{ duration: 1, delay: 0.5 }}
+          >
+            Mansi
+          </motion.span>{' '}
+          <motion.span 
+            className="last-name text-white"
+            initial={{ x: 20, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 1, delay: 0.8 }}
+          >
+            Rathor
+          </motion.span>
         </Name>
 
         <Title
-          theme={theme}
           variants={itemVariants}
+          className="mt-4"
         >
-          I'm a{' Full Stack Developer'}
-          <span className="highlight">
+          I'm a{' '}
+          <span className="text-cyber-cyan italic font-bold relative">
             <TypewriterText>
               {text}
             </TypewriterText>
+            <motion.span 
+              className="absolute -inset-1 bg-cyber-cyan/10 blur-xl rounded-full"
+              animate={{ opacity: [0.2, 0.5, 0.2] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
           </span>
         </Title>
 
         <Description
-          theme={theme}
           variants={itemVariants}
+          className="text-white/70 max-w-2xl mx-auto leading-relaxed mt-6"
         >
-          Crafting innovative web solutions with modern technologies.
-          Passionate about creating seamless user experiences and solving complex problems.
+          A passionate developer who enjoys turning ideas into interactive and meaningful web applications through code.
         </Description>
 
-        <ButtonGroup variants={itemVariants}>
-          <Button
-            className="primary"
-            onClick={handleDownloadResume}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <FiDownload style={{ marginRight: '0.5rem' }} />
-            Download Resume
-          </Button>
-          <Button
-            className="secondary"
-            theme={theme}
-            onClick={() => {
-              document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-            }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Get In Touch
-          </Button>
+        <ButtonGroup variants={itemVariants} className="mt-10 flex gap-6 justify-center">
+          <Magnetic>
+            <motion.button
+              onClick={handleDownloadResume}
+              className="px-8 py-4 bg-neon-gradient rounded-full text-white font-bold flex items-center gap-2 shadow-neon-glow hover:scale-105 active:scale-95 transition-all"
+            >
+              <FiDownload />
+              Download CV
+            </motion.button>
+          </Magnetic>
+          <Magnetic>
+            <motion.button
+              onClick={() => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' })}
+              className="px-8 py-4 border border-cyber-cyan/50 rounded-full text-white font-bold backdrop-blur-md hover:bg-cyber-cyan/10 transition-all flex items-center gap-2"
+            >
+              Let's Talk
+            </motion.button>
+          </Magnetic>
         </ButtonGroup>
 
-        <SocialLinks variants={itemVariants}>
-          <SocialIcon
-            theme={theme}
-            href="http://www.linkedin.com/in/mansi-rathor"
-            target="_blank"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <FiLinkedin />
-          </SocialIcon>
-          <SocialIcon
-            theme={theme}
-            href="https://github.com/mansirathor27"
-            target="_blank"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <FiGithub />
-          </SocialIcon>
-          <SocialIcon
-            theme={theme}
-            href="mailto:mansirathor575@gmail.com"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <FiMail />
-          </SocialIcon>
+        <SocialLinks variants={itemVariants} className="mt-12">
+          <Magnetic>
+            <SocialIcon
+              href="http://www.linkedin.com/in/mansi-rathor"
+              target="_blank"
+              className="glass-neumorphism"
+            >
+              <FiLinkedin />
+            </SocialIcon>
+          </Magnetic>
+          <Magnetic>
+            <SocialIcon
+              href="https://github.com/mansirathor27"
+              target="_blank"
+              className="glass-neumorphism"
+            >
+              <FiGithub />
+            </SocialIcon>
+          </Magnetic>
+          <Magnetic>
+            <SocialIcon
+              href="mailto:mansirathor575@gmail.com"
+              className="glass-neumorphism"
+            >
+              <FiMail />
+            </SocialIcon>
+          </Magnetic>
         </SocialLinks>
       </HeroContent>
 
       <ScrollIndicator
-        theme={theme}
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 2, duration: 0.5 }}
       >
         <a href="#about">
-          <FiArrowDown />
+          <FiArrowDown className="text-cyber-cyan" />
           <span>Scroll</span>
         </a>
       </ScrollIndicator>

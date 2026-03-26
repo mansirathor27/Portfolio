@@ -28,7 +28,17 @@ const ImageContainer = styled(motion.div)`
   margin: 0 auto;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border: 2px solid rgba(0, 212, 255, 0.3);
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 20px rgba(0, 212, 255, 0.2);
+    pointer-events: none;
+  }
 
   img {
     width: 100%;
@@ -70,10 +80,16 @@ const StatsContainer = styled.div`
 const StatItem = styled(motion.div)`
   text-align: center;
   padding: 1.5rem;
-  background: ${props => props.theme.cardBg};
-  border-radius: 15px;
-  border: 1px solid ${props => props.theme.border};
+  background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(10px);
+  border-radius: 15px;
+  border: 1px solid rgba(0, 212, 255, 0.1);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    border-color: rgba(0, 212, 255, 0.5);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.1);
+  }
 `;
 
 const StatValue = styled.div`

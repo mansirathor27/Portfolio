@@ -22,12 +22,12 @@ const ContactContainer = styled.div`
 `;
 
 const ContactInfo = styled(motion.div)`
-  background: ${props => props.theme.cardBg};
-  backdrop-filter: blur(10px);
-  border: 1px solid ${props => props.theme.border};
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 212, 255, 0.1);
   border-radius: 20px;
   padding: 2rem;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
 `;
 
 const InfoItem = styled(motion.div)`
@@ -70,12 +70,12 @@ const InfoValue = styled.p`
 `;
 
 const ContactForm = styled(motion.form)`
-  background: ${props => props.theme.cardBg};
-  backdrop-filter: blur(10px);
-  border: 1px solid ${props => props.theme.border};
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 212, 255, 0.1);
   border-radius: 20px;
   padding: 2rem;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
 `;
 
 const FormGroup = styled.div`
@@ -84,32 +84,29 @@ const FormGroup = styled.div`
 
 const Input = styled(motion.input)`
   width: 100%;
-  padding: 1rem;
-  background: ${props => props.theme.background};
-  border: 1px solid ${props => props.theme.border};
-  border-radius: 10px;
-  color: ${props => props.theme.text};
+  padding: 1.2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(0, 212, 255, 0.1);
+  border-radius: 12px;
+  color: #fff;
   font-size: 1rem;
   transition: all 0.3s ease;
 
   &:focus {
     outline: none;
-    border-color: ${props => props.theme.primary};
-    box-shadow: 0 0 0 2px ${props => props.theme.primary}40;
-  }
-
-  &::placeholder {
-    color: ${props => props.theme.text}80;
+    border-color: #00d4ff;
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
   }
 `;
 
 const TextArea = styled(motion.textarea)`
   width: 100%;
-  padding: 1rem;
-  background: ${props => props.theme.background};
-  border: 1px solid ${props => props.theme.border};
-  border-radius: 10px;
-  color: ${props => props.theme.text};
+  padding: 1.2rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(0, 212, 255, 0.1);
+  border-radius: 12px;
+  color: #fff;
   font-size: 1rem;
   min-height: 150px;
   resize: vertical;
@@ -117,34 +114,34 @@ const TextArea = styled(motion.textarea)`
 
   &:focus {
     outline: none;
-    border-color: ${props => props.theme.primary};
-    box-shadow: 0 0 0 2px ${props => props.theme.primary}40;
-  }
-
-  &::placeholder {
-    color: ${props => props.theme.text}80;
+    border-color: #00d4ff;
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
   }
 `;
 
 const SubmitButton = styled(motion.button)`
   width: 100%;
-  padding: 1rem;
-  background: linear-gradient(135deg, ${props => props.theme.primary}, ${props => props.theme.secondary});
+  padding: 1.2rem;
+  background: linear-gradient(135deg, #00d4ff, #6d28d9);
   color: white;
   border: none;
-  border-radius: 10px;
+  border-radius: 50px;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 0.8rem;
+  box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
   transition: all 0.3s ease;
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 212, 255, 0.4);
   }
 
   &:disabled {

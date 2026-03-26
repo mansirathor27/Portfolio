@@ -30,7 +30,7 @@ const ToggleButton = styled(motion.button)`
 function ThemeToggle({ theme, toggleTheme }) {
   return (
     <ToggleButton
-      theme={{ theme }}
+      theme={theme}
       onClick={toggleTheme}
       whileHover={{ scale: 1.1, rotate: 180 }}
       whileTap={{ scale: 0.9 }}

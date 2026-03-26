@@ -12,8 +12,12 @@ import Certificates from './components/Certificates';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ThemeToggle from './components/ThemeToggle';
+import CustomCursor from './components/CustomCursor';
+import CommandPalette from './components/CommandPalette';
+import Preloader from './components/Preloader';
 
 const lightTheme = {
+  type: 'light',
   background: '#ffffff',
   text: '#2d3436',
   primary: '#6c5ce7',
@@ -26,20 +30,23 @@ const lightTheme = {
 };
 
 const darkTheme = {
-  background: '#1a1a2e',
+  type: 'dark',
+  background: '#0a0a0f',
   text: '#ffffff',
-  primary: '#a363d9',
-  secondary: '#4a47a3',
+  primary: '#00d4ff',
+  secondary: '#6d28d9',
   accent: '#00d4ff',
-  cardBg: '#16213e',
-  border: '#0f3460',
-  shadow: 'rgba(0, 0, 0, 0.3)',
-  gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+  cardBg: 'rgba(255, 255, 255, 0.03)',
+  border: 'rgba(0, 212, 255, 0.1)',
+  shadow: 'rgba(0, 0, 0, 0.5)',
+  gradient: 'linear-gradient(135deg, #00d4ff 0%, #6d28d9 100%)'
 };
 
 function App() {
   const [theme, setTheme] = useState('dark');
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isPaletteOpen, setIsPaletteOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -56,34 +63,48 @@ function App() {
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
       <GlobalStyles />
-      <div className="app" style={{
-        background: theme === 'light' ? lightTheme.background : darkTheme.background,
-        color: theme === 'light' ? lightTheme.text : darkTheme.text
-      }}>
-        <div className="cursor-glow" style={{
-          left: mousePosition.x,
-          top: mousePosition.y
-        }} />
-        <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
-        <Navbar />
-        <AnimatePresence>
-          <motion.div
+      <AnimatePresence mode="wait">
+        {loading ? (
+          <Preloader key="loader" setLoading={setLoading} />
+        ) : (
+          <motion.div 
+            key="main"
+            className="app relative"
+            style={{
+              background: theme === 'light' ? lightTheme.background : darkTheme.background,
+              color: theme === 'light' ? lightTheme.text : darkTheme.text,
+              minHeight: '100vh'
+            }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
           >
-            <Hero />
-            <About />
-            <Skills />
-            <Projects />
-            <Education />
-            <Certificates />
-            <Contact />
-            <Footer />
+            <div className="cursor-glow" style={{
+              left: mousePosition.x,
+              top: mousePosition.y
+            }} />
+            <CustomCursor />
+            <CommandPalette 
+              isOpen={isPaletteOpen} 
+              setIsOpen={setIsPaletteOpen} 
+              toggleTheme={toggleTheme}
+              theme={theme}
+            />
+            <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+            <Navbar />
+            <motion.main>
+              <Hero />
+              <About />
+              <Skills />
+              <Projects />
+              <Education />
+              <Certificates />
+              <Contact />
+              <Footer />
+            </motion.main>
           </motion.div>
-        </AnimatePresence>
-      </div>
+        )}
+      </AnimatePresence>
     </ThemeProvider>
   );
 }

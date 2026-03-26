@@ -68,23 +68,25 @@ const ProjectsWrapper = styled.div`
 `;
 
 const ProjectCard = styled(motion.div)`
-  background: ${props => props.theme.cardBg};
-  backdrop-filter: blur(10px);
-  border: 1px solid ${props => props.theme.border};
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 212, 255, 0.1);
   border-radius: 25px;
   overflow: hidden;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
   position: relative;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  transition: all 0.4s ease;
   
   @media (max-width: 968px) {
     grid-template-columns: 1fr;
   }
   
   &:hover {
-    box-shadow: 0 30px 60px rgba(102, 126, 234, 0.3);
+    border-color: rgba(0, 212, 255, 0.4);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 212, 255, 0.1);
+    transform: translateY(-5px);
   }
 `;
 
@@ -172,18 +174,19 @@ const TechStack = styled.div`
 
 const TechTag = styled(motion.span)`
   padding: 0.5rem 1.2rem;
-  background: ${props => props.theme.background};
-  border: 1px solid ${props => props.theme.border};
-  color: ${props => props.theme.primary};
+  background: rgba(0, 212, 255, 0.05);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  color: #00d4ff;
   border-radius: 30px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   
   &:hover {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: white;
-    border-color: transparent;
+    background: #00d4ff;
+    color: #0a0a0f;
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
   }
 `;
 
@@ -201,32 +204,24 @@ const ProjectLink = styled(motion.a)`
   display: flex;
   align-items: center;
   gap: 0.8rem;
-  padding: 1rem 2rem;
+  padding: 0.8rem 1.8rem;
   border-radius: 50px;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   transition: all 0.3s ease;
-  
-  &.live {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: white;
-    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-    
-    &:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.5);
-    }
-  }
   
   &.github {
     background: transparent;
-    border: 2px solid #667eea;
-    color: #667eea;
+    border: 2px solid #00d4ff;
+    color: #00d4ff;
     
     &:hover {
-      background: #667eea;
-      color: white;
-      transform: translateY(-3px);
+      background: #00d4ff;
+      color: #0a0a0f;
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
     }
   }
 `;

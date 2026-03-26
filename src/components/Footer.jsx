@@ -3,11 +3,12 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useTheme } from 'styled-components';
 import { FiGithub, FiLinkedin, FiMail, FiHeart } from 'react-icons/fi';
+import Magnetic from './Magnetic';
 
 const FooterContainer = styled.footer`
-  background: ${props => props.theme.cardBg};
-  backdrop-filter: blur(10px);
-  border-top: 1px solid ${props => props.theme.border};
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(0, 212, 255, 0.1);
   padding: 3rem 5%;
 `;
 
@@ -29,17 +30,19 @@ const SocialLink = styled(motion.a)`
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: ${props => props.theme.background};
+  background: rgba(255, 255, 255, 0.05);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${props => props.theme.primary};
+  color: #00d4ff;
   font-size: 1.2rem;
+  border: 1px solid rgba(0, 212, 255, 0.1);
   transition: all 0.3s ease;
 
   &:hover {
-    background: ${props => props.theme.primary};
-    color: white;
+    background: #00d4ff;
+    color: #0a0a0f;
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
     transform: translateY(-3px);
   }
 `;
@@ -69,32 +72,32 @@ const Footer = () => {
     <FooterContainer theme={theme}>
       <FooterContent>
         <SocialLinks>
-          <SocialLink
-            theme={theme}
-            href="https://github.com/mansirathor27"
-            target="_blank"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <FiGithub />
-          </SocialLink>
-          <SocialLink
-            theme={theme}
-            href="http://www.linkedin.com/in/mansi-rathor"
-            target="_blank"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <FiLinkedin />
-          </SocialLink>
-          <SocialLink
-            theme={theme}
-            href="mailto:mansirathor575@gmail.com"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <FiMail />
-          </SocialLink>
+          <Magnetic>
+            <SocialLink
+              theme={theme}
+              href="https://github.com/mansirathor27"
+              target="_blank"
+            >
+              <FiGithub />
+            </SocialLink>
+          </Magnetic>
+          <Magnetic>
+            <SocialLink
+              theme={theme}
+              href="http://www.linkedin.com/in/mansi-rathor"
+              target="_blank"
+            >
+              <FiLinkedin />
+            </SocialLink>
+          </Magnetic>
+          <Magnetic>
+            <SocialLink
+              theme={theme}
+              href="mailto:mansirathor575@gmail.com"
+            >
+              <FiMail />
+            </SocialLink>
+          </Magnetic>
         </SocialLinks>
 
         <Copyright theme={theme}>
