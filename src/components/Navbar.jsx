@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import styled from 'styled-components';
 import { useTheme } from 'styled-components';
@@ -138,7 +138,7 @@ const CloseBtn = styled(motion.div)`
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  // const [_scrolled, setScrolled] = useState(false); // Changed to _scrolled to indicate intentionally unused
   const theme = useTheme();
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -147,13 +147,13 @@ function Navbar() {
     restDelta: 0.001
   });
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     setScrolled(window.scrollY > 50);
+  //   };
+  //   window.addEventListener('scroll', handleScroll);
+  //   return () => window.removeEventListener('scroll', handleScroll);
+  // }, []);
 
   const navItems = ['Home', 'About', 'Skills', 'Projects', 'Education', 'Contact'];
 

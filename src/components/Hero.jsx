@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, useAnimation, useInView } from 'framer-motion';
 import styled, { keyframes } from 'styled-components';
-import { useTheme } from 'styled-components';
 import { FiDownload, FiGithub, FiLinkedin, FiMail, FiArrowDown } from 'react-icons/fi';
 import HeroCanvas from './HeroCanvas';
 import Magnetic from './Magnetic';
@@ -11,12 +10,11 @@ const float = keyframes`
   50% { transform: translateY(-20px); }
 `;
 
-
-
-const rotate = keyframes`
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-`;
+// Remove this unused rotate keyframe
+// const rotate = keyframes`
+//   from { transform: rotate(0deg); }
+//   to { transform: rotate(360deg); }
+// `;
 
 const HeroSection = styled.section`
   min-height: 100vh;
@@ -29,66 +27,11 @@ const HeroSection = styled.section`
   padding: 0 5%;
 `;
 
-const BackgroundOrbs = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: 1;
-`;
-
-const Orb = styled.div`
-  position: absolute;
-  width: ${props => props.size || '300px'};
-  height: ${props => props.size || '300px'};
-  background: ${props => props.color || 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'};
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.3;
-  animation: ${float} ${props => props.duration || '8s'} infinite ease-in-out;
-  top: ${props => props.top};
-  left: ${props => props.left};
-  right: ${props => props.right};
-  bottom: ${props => props.bottom};
-`;
-
-const FloatingShapes = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-`;
-
-const Shape = styled(motion.div)`
-  position: absolute;
-  width: ${props => props.size || '50px'};
-  height: ${props => props.size || '50px'};
-  background: ${props => props.color || 'rgba(102, 126, 234, 0.1)'};
-  border-radius: ${props => props.round ? '50%' : '10px'};
-  backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  top: ${props => props.top};
-  left: ${props => props.left};
-  right: ${props => props.right};
-  bottom: ${props => props.bottom};
-  animation: ${rotate} ${props => props.duration || '20s'} linear infinite;
-`;
-
 const HeroContent = styled(motion.div)`
   position: relative;
   z-index: 10;
   text-align: center;
   max-width: 1000px;
-`;
-
-const Greeting = styled(motion.span)`
-  font-size: 1.2rem;
-  color: ${props => props.theme.primary};
-  display: block;
-  margin-bottom: 1rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
 `;
 
 const Name = styled(motion.h1)`
@@ -169,56 +112,6 @@ const ButtonGroup = styled(motion.div)`
   justify-content: center;
   margin: 2.5rem 0;
   flex-wrap: wrap;
-`;
-
-const Button = styled(motion.button)`
-  padding: 1rem 2.5rem;
-  border: none;
-  border-radius: 50px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s ease;
-
-  &.primary {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
-    
-    &:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
-    }
-  }
-
-  &.secondary {
-    background: transparent;
-    border: 2px solid #667eea;
-    color: ${props => props.theme.text};
-    
-    &:hover {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      transform: translateY(-3px);
-    }
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s ease;
-  }
-
-  &:hover::before {
-    left: 100%;
-  }
 `;
 
 const SocialLinks = styled(motion.div)`
@@ -322,10 +215,10 @@ const TypewriterText = styled(motion.span)`
     50% { opacity: 0; }
   }
 `;
+
 const titles = ['Full Stack Developer', 'Problem Solver', 'MERN Expert', 'Tech Enthusiast'];
 
 function Hero() {
-  const theme = useTheme();
   const controls = useAnimation();
   const ref = useRef(null);
   const inView = useInView(ref);
@@ -334,10 +227,7 @@ function Hero() {
   const [loopNum, setLoopNum] = useState(0);
   const [typingSpeed, setTypingSpeed] = useState(150);
 
- 
-
   useEffect(() => {
-     
     const handleTyping = () => {
       const i = loopNum % titles.length;
       const fullText = titles[i];
